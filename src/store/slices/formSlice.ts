@@ -13,7 +13,7 @@ const initialState: FormState = {
         category: '',
         difficulty: '',
         amount: '',
-        multiple: '',
+        type: '',
     },
     canSubmit: false,
     quizRequestSituation: "none"

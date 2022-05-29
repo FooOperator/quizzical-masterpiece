@@ -6,6 +6,7 @@ import { AppDispatch, configuredStore, RootState } from '../store'
 import { getQuiz } from '../store/helpers'
 import { formSlice } from '../store/slices'
 import { QuizParams } from '../types/store'
+import { default as S } from './LandingPage.styled';
 
 const categories = [
     { "id": -1, "name": "Any Category" },
@@ -59,21 +60,25 @@ const LandingPage: React.FC = () => {
     const canSubmit = useSelector((state: RootState) => state.form.canSubmit);
     const dispatch = useDispatch<AppDispatch>();
     const [quizParamsForm, setQuizForm] = useState<QuizParams>({
-        amount: '10',
+        amount: '5',
         category: -1,
         difficulty: -1,
-        multiple: -1,
+        type: -1,
     })
 
     useEffect(() => {
         console.log(quizParamsForm);
+    }, [quizParamsForm])
+
+    useEffect(() => {
         dispatch(formSlice.actions.setCanSubmit(true));
     }, []);
 
     const handleFormChange = (event: FormEvent<any>) => {
         const { name, value, type, checked } = event.currentTarget;
-        console.log(`name: ${name}\nvalue: ${value}\ntype: ${type}\nchecked: ${checked}`);
-        setQuizForm({ ...quizParamsForm, [name]: type === 'checkbox' ? checked : value });
+        let processedValue = value;
+        if (processedValue === '-1') processedValue = -1;
+        setQuizForm({ ...quizParamsForm, [name]: type === 'checkbox' ? checked : processedValue });
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -83,60 +88,64 @@ const LandingPage: React.FC = () => {
     }
 
     return (
-        <div>
-            <h1>Landing Page</h1>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <label htmlFor="amount-select">Select amount</label>
-                    <select id='amount-select' name='amount' value={quizParamsForm.amount} onChange={handleFormChange}>
+        <S.Section>
+            <S.Wrapper>
+                <h1>Landing Page</h1>
+                <form onSubmit={handleSubmit}>
+                    <S.ColumnFieldset>
+                        <label htmlFor="amount-select">Select amount</label>
+                        <select id='amount-select' name='amount' value={quizParamsForm.amount} onChange={handleFormChange}>
+                            {
+                                amounts.map(({ value, label }, index) =>
+                                    <option key={index} value={value}>{label}</option>
+                                )
+                            }
+                        </select>
+                    </S.ColumnFieldset>
+                    <S.ColumnFieldset>
+                        <label htmlFor="difficulty-select">Select Difficulty</label>
+                        <select id='difficulty-select' name='difficulty' value={quizParamsForm.difficulty} onChange={handleFormChange}>
+                            {
+                                difficulties.map(({ value, label }, index) =>
+                                    <option key={index} value={value}>{label}</option>
+                                )
+                            }
+                        </select>
+                    </S.ColumnFieldset>
+                    <S.ColumnFieldset>
+                        <label htmlFor="category-select">Select Category</label>
+                        <select name="category" id="category-select" value={quizParamsForm.category} onChange={handleFormChange}>
+                            {
+                                categories.map(({ id, name }, index) =>
+                                    <option key={index} value={id}>{name}</option>
+                                )
+                            }
+                        </select>
+                    </S.ColumnFieldset>
+                    <S.RowFieldset>
+                        <legend>Choose the quiz type</legend>
                         {
-                            amounts.map(({ value, label }, index) =>
-                                <option key={index} value={value}>{label}</option>
+                            types.map(({ value, label }, index) =>
+                                <div key={index}>
+                                    <input
+                                        id={`${label}-radio`}
+                                        type='radio'
+                                        name='type'
+                                        value={value}
+                                        checked={value === quizParamsForm.type}
+                                        onChange={handleFormChange}
+                                    />
+                                    <label htmlFor={`${label}-radio`}>{label}</label>
+                                </div>
                             )
                         }
-                    </select>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="difficulty-select">Select Difficulty</label>
-                    <select id='difficulty-select' name='difficulty' value={quizParamsForm.difficulty} onChange={handleFormChange}>
-                        {
-                            difficulties.map(({ value, label }, index) =>
-                                <option key={index} value={value}>{label}</option>
-                            )
-                        }
-                    </select>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="category-select">Select Category</label>
-                    <select name="category" id="category-select" value={quizParamsForm.category} onChange={handleFormChange}>
-                        {
-                            categories.map(({ id, name }, index) =>
-                                <option key={index} value={id}>{name}</option>
-                            )
-                        }
-                    </select>
-                </fieldset>
-                <fieldset>
-                    <legend>Choose the quiz type</legend>
-                    {
-                        types.map(({ value, label }, index) =>
-                            <div key={index}>
-                                <label htmlFor={`${label}-radio`}>{label}</label>
-                                <input
-                                    id={`${label}-radio`}
-                                    type='radio'
-                                    name='multiple'
-                                    value={value}
-                                    checked={value === quizParamsForm.multiple}
-                                    onChange={handleFormChange}
-                                />
-                            </div>
-                        )
-                    }
-                </fieldset>
-                <button disabled={!canSubmit}>Start Quiz</button>
-            </form>
-        </div>
+                    </S.RowFieldset>
+                    <S.RowFieldset>
+                        <S.Button disabled={!canSubmit}>Start Quiz</S.Button>
+                    </S.RowFieldset>
+                </form>
+            </S.Wrapper>
+        </S.Section>
     )
 }
 

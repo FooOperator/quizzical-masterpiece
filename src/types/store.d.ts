@@ -3,7 +3,7 @@ export type QuizParams = {
     category: QuizParam;
     difficulty: QuizParam;
     amount: QuizParam;
-    multiple: QuizParam;
+    type: QuizParam;
 }
 
 export interface Question {

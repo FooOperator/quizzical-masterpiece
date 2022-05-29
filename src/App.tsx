@@ -1,10 +1,31 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
 import LandingPage from './components/LandingPage';
 import Quiz from './components/Quiz';
 import { RootState } from './store';
 import { quizSlice } from './store/slices';
+import { GlobalStyle } from './styles/GlobalStyle';
+
+const createTheme = (theme: DefaultTheme) => {
+  return Object.keys(theme).reduce((acc, key) => {
+    let current = theme[key];
+    if (!current.startsWith("#")) {
+      current = `#${current}`;
+    }
+    acc[key] = current;
+    return acc;
+  }, {} as DefaultTheme);
+};
+
+const placeholderTheme: DefaultTheme = createTheme({
+  background: "#d8ddef",
+  body: "#a0a4b8",
+  hover: "#7293a0",
+  primary: "#45b69c",
+  secondary: "#8c4843"
+});
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,16 +45,6 @@ const App: React.FC = () => {
     }
   }
 
-
-  const handleReturnToMain = () => {
-    dispatch(returnToMainMenu());
-  }
-
-  const handlePlayAgain = () => {
-    dispatch(playAgain());
-  }
-
-
   const IfQuizNotRunning = () => {
     if (showResults) {
       return (
@@ -47,17 +58,29 @@ const App: React.FC = () => {
     return <LandingPage />
   }
 
+  const handleReturnToMain = () => {
+    dispatch(returnToMainMenu());
+  }
+
+  const handlePlayAgain = () => {
+    dispatch(playAgain());
+  }
+
   return (
-    <div className="App">
-      {
-        quizRunning ?
-          IfQuizRunning()
-          :
-          IfQuizNotRunning()
-      }
-    </div>
+    <ThemeProvider theme={placeholderTheme}>
+      <GlobalStyle />
+      <div className="App">
+        {
+          quizRunning ?
+            IfQuizRunning()
+            :
+            IfQuizNotRunning()
+        }
+      </div>
+    </ThemeProvider>
   )
 }
+
 
 const { returnToMainMenu, playAgain } = quizSlice.actions;
 
