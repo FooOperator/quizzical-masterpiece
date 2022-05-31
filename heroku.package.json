@@ -1,11 +1,15 @@
 {
   "name": "quizzical",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
