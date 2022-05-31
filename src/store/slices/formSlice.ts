@@ -25,22 +25,22 @@ const formSlice = createSlice({
     name: "form",
     initialState: initialState,
     reducers: {
-        setCanSubmit: (state, action: PayloadAction<boolean>) => {
+        setCanSubmit: (state: FormState, action: PayloadAction<boolean>) => {
             state.canSubmit = action.payload;
         },
-        handleSubmit: (state, action: PayloadAction<QuizParams>) => {
+        handleSubmit: (state: FormState, action: PayloadAction<QuizParams>) => {
             if (!state.canSubmit) return state;
             state.fields = action.payload;
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getQuiz.fulfilled, (state, action) => {
+        builder.addCase(getQuiz.fulfilled, (state: FormState, action: {}) => {
             state.quizRequestSituation = 'fulfilled';
         }),
-            builder.addCase(getQuiz.rejected, (state, action) => {
+            builder.addCase(getQuiz.rejected, (state: FormState, action: {}) => {
                 state.quizRequestSituation = 'rejected'
             }),
-            builder.addCase(getQuiz.pending, (state, action) => {
+            builder.addCase(getQuiz.pending, (state: FormState, action: {}) => {
                 state.quizRequestSituation = 'pending'
             })
     }
