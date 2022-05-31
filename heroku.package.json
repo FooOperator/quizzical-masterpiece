@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "deploy": "yarn build && cp heroku.package.json dist/package.json && cd dist && git add --all && git commit -m 'deploy' && git push origin heroku && cd -",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
