@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "deploy": "rm -f -r dist && mkdir dist && yarn build && cp heroku.package.json dist/package.json && cd dist && git add --all && git commit -m 'deploy' && cd - && git push origin heroku",
+    "deploy": "yarn build && cp heroku.package.json dist/package.json && git push heroku master",
     "preview": "vite preview"
   },
   "dependencies": {
