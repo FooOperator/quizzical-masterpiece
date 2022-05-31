@@ -1,15 +1,14 @@
-import { AnyAction, AsyncThunkAction, getType } from '@reduxjs/toolkit'
-import React, { Dispatch, FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { AppDispatch, configuredStore, RootState } from '../store'
-import { getQuiz } from '../store/helpers'
-import { formSlice } from '../store/slices'
-import { QuizParams } from '../types/store'
+import { AppDispatch, configuredStore, RootState } from '../../store'
+import { getQuiz } from '../../store/helpers'
+import { formSlice } from '../../store/slices'
+import { QuizParams } from '../../types/store'
 import { default as S } from './LandingPage.styled';
 
 const categories = [
-    { "id": -1, "name": "Any Category" },
+    { "id": -1, "name": "Mixed" },
     { "id": 9, "name": "General Knowledge" },
     { "id": 10, "name": "Entertainment: Books" },
     { "id": 11, "name": "Entertainment: Film" },
@@ -67,10 +66,6 @@ const LandingPage: React.FC = () => {
     })
 
     useEffect(() => {
-        console.log(quizParamsForm);
-    }, [quizParamsForm])
-
-    useEffect(() => {
         dispatch(formSlice.actions.setCanSubmit(true));
     }, []);
 
@@ -88,12 +83,12 @@ const LandingPage: React.FC = () => {
     }
 
     return (
-        <S.Section>
-            <S.Wrapper>
+        <S.Wrapper>
+            <S.Stack>
                 <h1>Landing Page</h1>
                 <form onSubmit={handleSubmit}>
                     <S.ColumnFieldset>
-                        <label htmlFor="amount-select">Select amount</label>
+                        <label htmlFor="amount-select">Number of Questions</label>
                         <select id='amount-select' name='amount' value={quizParamsForm.amount} onChange={handleFormChange}>
                             {
                                 amounts.map(({ value, label }, index) =>
@@ -103,7 +98,7 @@ const LandingPage: React.FC = () => {
                         </select>
                     </S.ColumnFieldset>
                     <S.ColumnFieldset>
-                        <label htmlFor="difficulty-select">Select Difficulty</label>
+                        <label htmlFor="difficulty-select">Difficulty</label>
                         <select id='difficulty-select' name='difficulty' value={quizParamsForm.difficulty} onChange={handleFormChange}>
                             {
                                 difficulties.map(({ value, label }, index) =>
@@ -113,7 +108,7 @@ const LandingPage: React.FC = () => {
                         </select>
                     </S.ColumnFieldset>
                     <S.ColumnFieldset>
-                        <label htmlFor="category-select">Select Category</label>
+                        <label htmlFor="category-select">Category</label>
                         <select name="category" id="category-select" value={quizParamsForm.category} onChange={handleFormChange}>
                             {
                                 categories.map(({ id, name }, index) =>
@@ -144,8 +139,8 @@ const LandingPage: React.FC = () => {
                         <S.Button disabled={!canSubmit}>Start Quiz</S.Button>
                     </S.RowFieldset>
                 </form>
-            </S.Wrapper>
-        </S.Section>
+            </S.Stack>
+        </S.Wrapper>
     )
 }
 

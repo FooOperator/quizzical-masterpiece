@@ -23,20 +23,17 @@ const quizSlice = createSlice({
     name: 'quiz',
     initialState: initialState,
     reducers: {
-        getResults: (state, action: PayloadAction<number[]>) => {
+        finishQuiz: (state, action: PayloadAction<number[]>) => {
             const { questions } = state;
             action.payload.forEach((answerIndex, index) => {
+                console.log(`selected index: ${answerIndex}\ncorrect index: ${questions[index].correctAnswerIndex}`);
                 if (questions[index].correctAnswerIndex === answerIndex) {
                     state.score++;
                 }
             })
+            console.log(state.score);
             state.quizRunning = false;
-        },
-        quizEnded: (state) => {
             state.showResults = true;
-        },
-        quizStarted: (state) => {
-            state.quizRunning = true;
         },
         returnToMainMenu: (state) => {
             state.showResults = false;
@@ -58,7 +55,7 @@ const quizSlice = createSlice({
             const results = action.payload['results'];
             Object.keys(results).map((key, index) => {
                 const answers = shuffleArray([...results[key]['incorrect_answers'], results[key]['correct_answer']].map((answer) => UnicodeDecodeB64(answer)));
-                const correctAnswerIndex = answers.indexOf(results[key]['correct_answer']);
+                const correctAnswerIndex = answers.indexOf(UnicodeDecodeB64(results[key]['correct_answer']));
                 const question: Question = {
                     id: index,
                     question: UnicodeDecodeB64(results[key]['question']),

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
-import LandingPage from './components/LandingPage';
-import Quiz from './components/Quiz';
+import LandingPage from './components/LandingPage/LandingPage';
+import { Quiz } from './components/Quiz';
+import { Results } from './components/Results';
 import { RootState } from './store';
 import { quizSlice } from './store/slices';
 import { GlobalStyle } from './styles/GlobalStyle';
@@ -28,7 +28,6 @@ const placeholderTheme: DefaultTheme = createTheme({
 });
 
 const App: React.FC = () => {
-  const dispatch = useDispatch();
   const { quizRequestSituation } = useSelector((state: RootState) => state.form);
   const { quizRunning, showResults } = useSelector((state: RootState) => state.quiz);
 
@@ -47,24 +46,12 @@ const App: React.FC = () => {
 
   const IfQuizNotRunning = () => {
     if (showResults) {
-      return (
-        <div>
-          <h1>Quiz ended</h1>
-          <button onClick={handlePlayAgain}>Play Again</button>
-          <button onClick={handleReturnToMain}>Return to Main</button>
-        </div>
-      )
+      return <Results />
     }
     return <LandingPage />
   }
 
-  const handleReturnToMain = () => {
-    dispatch(returnToMainMenu());
-  }
 
-  const handlePlayAgain = () => {
-    dispatch(playAgain());
-  }
 
   return (
     <ThemeProvider theme={placeholderTheme}>

@@ -1,14 +1,17 @@
 import styled from "styled-components";
+import { FlexFieldset } from "../LandingPage/LandingPage.styled";
 
 export default {
     Wrapper: styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 100%;
     `,
     AnswersList: styled.ul`
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         > li:nth-child(n+1) {
             margin-right: .3em;
         }
@@ -16,16 +19,18 @@ export default {
     QuestionList: styled.ul`
         display: flex;
         flex-direction: column;
-        margin-top: 2em;
         margin: 2em auto 1em auto;
+        padding: 0;
 
         > li {
-            :nth-child(n+1) { 
-                margin-top: .3em;
-            }
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            :nth-child(n+1) { 
+                margin-top: .3em;
+            }
+            
             > h3 {
                 margin-bottom: 1em;
             }
@@ -33,11 +38,13 @@ export default {
     `,
     ButtonsContainer: styled.div`
         display: flex;
-        > * {
-            padding: .5em;
+        flex: 1;
+        justify-content: center;
+        > button {
             :nth-child(n+1) { 
-                margin-left: .5em;
+                margin-left: .3em;
             }
         }
-    `
+    `,
+    
 }
