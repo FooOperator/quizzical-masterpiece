@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -6,7 +7,7 @@ import { Quiz } from './components/Quiz';
 import { Results } from './components/Results';
 import { RootState } from './store';
 import { quizSlice } from './store/slices';
-import { GlobalStyle } from './styles/GlobalStyle';
+import GlobalStyle from './styles/GlobalStyle';
 
 const createTheme = (theme: DefaultTheme) => {
   return Object.keys(theme).reduce((acc, key) => {
@@ -51,10 +52,13 @@ const App: React.FC = () => {
     return <LandingPage />
   }
 
-
-
   return (
     <ThemeProvider theme={placeholderTheme}>
+      <Helmet>
+        <title>
+          Quizzical Redux{quizRunning ? ' - Playing' : showResults ? ' - Results' : ''}
+        </title>
+      </Helmet>
       <GlobalStyle />
       <div className="App">
         {
@@ -67,7 +71,6 @@ const App: React.FC = () => {
     </ThemeProvider>
   )
 }
-
 
 const { returnToMainMenu, playAgain } = quizSlice.actions;
 
