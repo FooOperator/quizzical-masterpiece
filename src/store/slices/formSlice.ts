@@ -1,5 +1,4 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QuizParams } from "../../types/store";
 import { getQuiz } from "../helpers";
 
 type FormState = {

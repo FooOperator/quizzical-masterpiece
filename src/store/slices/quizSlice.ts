@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Question } from "../../types/store";
 import { getQuiz, shuffleArray } from "../helpers";
 import { UnicodeDecodeB64 } from "../helpers/utils";
 

@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch, configuredStore, RootState } from '../../store'
 import { getQuiz } from '../../store/helpers'
 import { formSlice } from '../../store/slices'
-import { QuizParams } from '../../types/store'
 import { default as S } from './LandingPage.styled';
 
 const categories = [
