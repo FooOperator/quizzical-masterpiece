@@ -33,27 +33,27 @@ const categories = [
     { "id": 30, "name": "Science: Gadgets" },
     { "id": 31, "name": "Entertainment: Japanese Anime & Manga" },
     { "id": 32, "name": "Entertainment: Cartoon & Animations" }
-]
+];
 
 const amounts = [
     { "value": "5", "label": "5 Questions" },
     { "value": "10", "label": "10 Questions" },
     { "value": "15", "label": "15 Questions" },
     { "value": "20", "label": "20 Questions" },
-]
+];
 
 const difficulties = [
     { "value": -1, "label": "Any Difficulty" },
     { "value": "easy", "label": "Easy" },
     { "value": "medium", "label": "Medium" },
     { "value": "hard", "label": "Hard" },
-]
+];
 
 const types = [
     { "value": -1, "label": "Any Type" },
     { "value": "multiple", "label": "Multiple Choice" },
     { "value": "boolean", "label": "True/False" },
-]
+];
 
 const LandingPage: React.FC = () => {
     const canSubmit = useSelector((state: RootState) => state.form.canSubmit);
@@ -85,7 +85,7 @@ const LandingPage: React.FC = () => {
     return (
         <S.Wrapper>
             <S.Stack>
-                <h1>Landing Page</h1>
+                <h1>Quizzical Redux</h1>
                 <form onSubmit={handleSubmit}>
                     <S.ColumnFieldset>
                         <label htmlFor="amount-select">Number of Questions</label>
@@ -136,7 +136,9 @@ const LandingPage: React.FC = () => {
                         }
                     </S.RowFieldset>
                     <S.RowFieldset>
-                        <S.Button disabled={!canSubmit}>Start Quiz</S.Button>
+                        <S.Button disabled={!canSubmit}>
+                            Start Quiz
+                        </S.Button>
                     </S.RowFieldset>
                 </form>
             </S.Stack>
@@ -144,4 +146,4 @@ const LandingPage: React.FC = () => {
     )
 }
 
-export default LandingPage
+export default LandingPage;
