@@ -12,14 +12,12 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: var(--font);
-        // background-color: ${({theme}) => theme.background}
-        background-color: pink;
+        background-color: ${({theme}) => theme.background};
     }
 
-    li {
+    ul {
         list-style: none;
     }
-
 
     select,
     input[type='radio'] + label,
