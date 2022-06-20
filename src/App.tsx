@@ -20,8 +20,7 @@ const createTheme = (theme: DefaultTheme) => {
 };
 
 const placeholderTheme: DefaultTheme = createTheme({
-  // background: "#d8ddef",
-  background: "pink",
+  background: "#d8ddef",
   body: "#a0a4b8",
   hover: "#7293a0",
   primary: "#45b69c",
