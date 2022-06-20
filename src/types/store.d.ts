@@ -1,4 +1,4 @@
-export type QuizParams = {
+declare type QuizParams = {
     [key: string]: QuizParam;
     category: QuizParam;
     difficulty: QuizParam;
@@ -6,7 +6,7 @@ export type QuizParams = {
     type: QuizParam;
 }
 
-export interface Question {
+declare interface Question {
     id: number;
     question: string;
     category: string;
@@ -15,4 +15,4 @@ export interface Question {
     correctAnswerIndex: number;
 }
 
-export type QuizParam = string | -1;
+declare type QuizParam = string | -1;

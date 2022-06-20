@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store'
-import { quizSlice } from '../../store/slices';
 import { ButtonRowFieldset, FlexFieldset } from '../LandingPage/LandingPage.styled';
+import { quizSlice } from '../../store/slices';
 import { default as S } from './Quiz.styled';
-interface QuizProps {
-
-}
 
 const { finishQuiz, returnToMainMenu } = quizSlice.actions;
 
-const Quiz: React.FC<QuizProps> = () => {
+const Quiz: React.FC = () => {
     const quizState = useSelector((state: RootState) => state.quiz);
     const dispatch = useDispatch();
     const { questions } = quizState;
@@ -60,7 +56,6 @@ const Quiz: React.FC<QuizProps> = () => {
                                                         value={answer}
                                                         id={radioId}
                                                         onChange={(e) => {
-                                                            // console.log('selected index:', answerIndex);
                                                             setSelectedAnswers(prev => [...prev.slice(0, questionIndex), answerIndex, ...prev.slice(questionIndex + 1)])
                                                         }}
                                                     />

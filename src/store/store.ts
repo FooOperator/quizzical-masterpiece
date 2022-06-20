@@ -1,7 +1,7 @@
 import { configureStore, Store } from "@reduxjs/toolkit";
 import { formSlice, quizSlice, uiSlice } from "./slices";
 
-export const configuredStore = configureStore({
+const configuredStore = configureStore({
     reducer: {
         quiz: quizSlice.reducer,
         ui: uiSlice.reducer,
@@ -11,4 +11,4 @@ export const configuredStore = configureStore({
 
 export type RootState = ReturnType<typeof configuredStore.getState>;
 export type AppDispatch = typeof configuredStore.dispatch;
-export default configureStore;
+export default configuredStore;
