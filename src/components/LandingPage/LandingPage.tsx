@@ -82,67 +82,85 @@ const LandingPage: React.FC = () => {
     }
 
     return (
-        <S.Wrapper>
-            <S.Stack>
-                <h1>Quizzical Redux</h1>
-                <form onSubmit={handleSubmit}>
-                    <S.ColumnFieldset>
-                        <label htmlFor="amount-select">Number of Questions</label>
-                        <select id='amount-select' name='amount' value={quizParamsForm.amount} onChange={handleFormChange}>
-                            {
-                                amounts.map(({ value, label }, index) =>
-                                    <option key={index} value={value}>{label}</option>
-                                )
-                            }
-                        </select>
-                    </S.ColumnFieldset>
-                    <S.ColumnFieldset>
-                        <label htmlFor="difficulty-select">Difficulty</label>
-                        <select id='difficulty-select' name='difficulty' value={quizParamsForm.difficulty} onChange={handleFormChange}>
-                            {
-                                difficulties.map(({ value, label }, index) =>
-                                    <option key={index} value={value}>{label}</option>
-                                )
-                            }
-                        </select>
-                    </S.ColumnFieldset>
-                    <S.ColumnFieldset>
-                        <label htmlFor="category-select">Category</label>
-                        <select name="category" id="category-select" value={quizParamsForm.category} onChange={handleFormChange}>
-                            {
-                                categories.map(({ id, name }, index) =>
-                                    <option key={index} value={id}>{name}</option>
-                                )
-                            }
-                        </select>
-                    </S.ColumnFieldset>
-                    <S.RowFieldset>
-                        <legend>Choose the quiz type</legend>
-                        {
-                            types.map(({ value, label }, index) =>
-                                <div key={index}>
-                                    <input
-                                        id={`${label}-radio`}
-                                        type='radio'
-                                        name='type'
-                                        value={value}
-                                        checked={value === quizParamsForm.type}
-                                        onChange={handleFormChange}
-                                    />
-                                    <label htmlFor={`${label}-radio`}>{label}</label>
-                                </div>
-                            )
-                        }
-                    </S.RowFieldset>
-                    <S.RowFieldset>
-                        <S.Button disabled={!canSubmit}>
-                            Start Quiz
-                        </S.Button>
-                    </S.RowFieldset>
-                </form>
-            </S.Stack>
-        </S.Wrapper>
-    )
+		<S.Wrapper>
+			<S.Stack>
+				<h1>Quizzical Masterpiece</h1>
+				<form onSubmit={handleSubmit}>
+					<S.ColumnFieldset>
+						<label htmlFor="amount-select">
+							Number of Questions
+						</label>
+						<select
+							id="amount-select"
+							name="amount"
+							value={quizParamsForm.amount}
+							onChange={handleFormChange}>
+							{amounts.map(({ value, label }, index) => (
+								<option key={index} value={value}>
+									{label}
+								</option>
+							))}
+						</select>
+					</S.ColumnFieldset>
+					<S.ColumnFieldset>
+						<label htmlFor="difficulty-select">
+							Difficulty
+						</label>
+						<select
+							id="difficulty-select"
+							name="difficulty"
+							value={quizParamsForm.difficulty}
+							onChange={handleFormChange}>
+							{difficulties.map(
+								({ value, label }, index) => (
+									<option key={index} value={value}>
+										{label}
+									</option>
+								)
+							)}
+						</select>
+					</S.ColumnFieldset>
+					<S.ColumnFieldset>
+						<label htmlFor="category-select">Category</label>
+						<select
+							name="category"
+							id="category-select"
+							value={quizParamsForm.category}
+							onChange={handleFormChange}>
+							{categories.map(({ id, name }, index) => (
+								<option key={index} value={id}>
+									{name}
+								</option>
+							))}
+						</select>
+					</S.ColumnFieldset>
+					<S.RowFieldset>
+						<legend>Choose the quiz type</legend>
+						{types.map(({ value, label }, index) => (
+							<div key={index}>
+								<input
+									id={`${label}-radio`}
+									type="radio"
+									name="type"
+									value={value}
+									checked={value === quizParamsForm.type}
+									onChange={handleFormChange}
+								/>
+								<label htmlFor={`${label}-radio`}>
+									{label}
+								</label>
+							</div>
+						))}
+					</S.RowFieldset>
+					<S.RowFieldset>
+						<S.Button disabled={!canSubmit}>
+							Start Quiz
+						</S.Button>
+					</S.RowFieldset>
+				</form>
+			</S.Stack>
+		</S.Wrapper>
+	);
 }
 
 export default LandingPage;

@@ -56,7 +56,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={placeholderTheme}>
       <Helmet>
         <title>
-          Quizzical Redux{quizRunning ? ' - Playing' : showResults ? ' - Results' : ''}
+          Quizzical Masterpiece{quizRunning ? ' - Playing' : showResults ? ' - Results' : ''}
         </title>
       </Helmet>
       <GlobalStyle />
